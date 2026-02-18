@@ -1,8 +1,8 @@
-# CLAUDE.md — AMATERASU Template
+# CLAUDE.md — AMATERASU
 
 ## Project Overview
 
-AMATERASU is a template for building apps in the Sekigahara ecosystem on the Hunt Town Co-op (Base chain). Hub-and-spoke token model: `$SEKI` (HUNT-backed parent) → child tokens (one per app). Fork this template, set env vars, rename tokens, build your HomePage, deploy.
+AMATERASU is the Sekigahara app engine on the Hunt Town Co-op (Base chain). Hub-and-spoke token model: `$SEKI` (HUNT-backed parent) → child tokens (one per app). Fork AMATERASU, set env vars, rename tokens, build your HomePage, deploy.
 
 ## Tech Stack
 

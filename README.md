@@ -1,10 +1,10 @@
 # AMATERASU
 
-Sekigahara app template for building ecosystem apps on Base chain with Farcaster MiniApp support.
+Sekigahara app engine for building ecosystem apps on Base chain with Farcaster MiniApp support.
 
 ## What Is This?
 
-AMATERASU is the generic "app engine" extracted from the Sekigahara ecosystem. It provides:
+AMATERASU is the Sekigahara app engine. It provides:
 
 - Farcaster MiniApp auto-connect + standalone wallet support (RainbowKit)
 - Sign In With Farcaster (SIWF) authentication
@@ -13,13 +13,13 @@ AMATERASU is the generic "app engine" extracted from the Sekigahara ecosystem. I
 - Light/dark theme with shadcn/ui components
 - Static-first architecture (no backend server required)
 
-Fork this template, customize it for your app, and deploy.
+Fork AMATERASU, customize it for your app, and deploy.
 
 ## Quick Start
 
 ```bash
-# 1. Clone/fork this template
-cp -r template/ my-app/
+# 1. Clone/fork AMATERASU
+cp -r AMATERASU/ my-app/
 cd my-app
 
 # 2. Install dependencies
