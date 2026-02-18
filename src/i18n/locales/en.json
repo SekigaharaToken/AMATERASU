@@ -1,0 +1,81 @@
+{
+  "app": {
+    "name": "AMATERASU",
+    "tagline": "Illuminate the Chain."
+  },
+  "home": {
+    "placeholder": "This is your app's home page. Replace this placeholder with your custom experience."
+  },
+  "nav": {
+    "home": "Home",
+    "swap": "Swap",
+    "about": "About"
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect",
+    "wrongNetwork": "Switch to Base"
+  },
+  "auth": {
+    "signInWithFarcaster": "Sign In With Farcaster",
+    "orConnectWallet": "Or connect a wallet",
+    "scanQrCode": "Scan the QR code with your phone",
+    "signInDescription": "Connect your Farcaster account to get started",
+    "openDirectly": "open directly",
+    "connectWithFarcaster": "Connect with Farcaster",
+    "creatingConnection": "Creating connection...",
+    "cancel": "Cancel"
+  },
+  "swap": {
+    "title": "Swap",
+    "buyToken": "Buy $TOKEN",
+    "sellToken": "Sell $TOKEN",
+    "buySeki": "Buy $SEKI",
+    "sellSeki": "Sell $SEKI",
+    "price": "Current Price",
+    "priceToken": "Current $TOKEN Price",
+    "priceSeki": "Current $SEKI Price",
+    "amount": "Amount",
+    "cost": "Cost",
+    "receive": "You receive",
+    "fee": "Fee",
+    "totalCost": "Total Cost",
+    "gasDisclaimer": "Additional Base network gas fees apply to all transactions.",
+    "swapWarningTitle": "Warning",
+    "sellWarningTitle": "Significant Value Loss",
+    "sellWarning": "The per-token refund is lower than the current buy price. You may lose significant value on this sell.",
+    "noSupply": "No tokens have been minted yet. Selling is not available.",
+    "maxSupply": "Maximum supply reached. Buying is not available.",
+    "exceedsSupply": "This amount would exceed the maximum token supply.",
+    "exceedsBalance": "Amount exceeds your wallet balance of {{balance}}."
+  },
+  "toast": {
+    "swapBuySuccess": "Purchase complete!",
+    "swapSellSuccess": "Sale complete!",
+    "swapFailed": "Swap failed"
+  },
+  "errors": {
+    "walletNotConnected": "Please connect your wallet",
+    "connectWalletToTransact": "Connect a wallet to sign transactions",
+    "transactionFailed": "Transaction failed",
+    "networkError": "Network error. Please try again.",
+    "userRejected": "Transaction was rejected",
+    "insufficientFunds": "Insufficient funds for gas",
+    "unknown": "Something went wrong: {{message}}",
+    "boundaryTitle": "Something went wrong",
+    "boundaryMessage": "An unexpected error occurred. Please try refreshing the page.",
+    "boundaryRefresh": "Refresh"
+  },
+  "a11y": {
+    "changeLanguage": "Change language",
+    "toggleTheme": "Toggle theme",
+    "qrCode": "QR code for Warpcast sign in"
+  },
+  "hunt": {
+    "backSeki": "Back $SEKI on Hunt.town"
+  },
+  "footer": {
+    "builtOn": "Built on Base",
+    "poweredBy": "Powered by Sekigahara"
+  }
+}

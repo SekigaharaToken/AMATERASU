@@ -1,0 +1,20 @@
+{
+  "accountAssociation": {
+    "header": "REPLACE_WITH_YOUR_ACCOUNT_ASSOCIATION_HEADER",
+    "payload": "REPLACE_WITH_YOUR_ACCOUNT_ASSOCIATION_PAYLOAD",
+    "signature": "REPLACE_WITH_YOUR_ACCOUNT_ASSOCIATION_SIGNATURE"
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "AMATERASU",
+    "iconUrl": "https://your-app.vercel.app/icon.png",
+    "homeUrl": "https://your-app.vercel.app",
+    "splashImageUrl": "https://your-app.vercel.app/icon.png",
+    "splashBackgroundColor": "#000000",
+    "ogTitle": "AMATERASU",
+    "ogDescription": "Illuminate the Chain.",
+    "ogImageUrl": "https://your-app.vercel.app/og-image.png",
+    "primaryCategory": "social",
+    "subtitle": "Sekigahara ecosystem app"
+  }
+}
