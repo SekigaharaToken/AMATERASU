@@ -15,11 +15,11 @@ vi.mock("wagmi", () => ({
   useAccount: (...args) => mockUseAccount(...args),
 }));
 
-vi.mock("@/hooks/useFarcaster.js", () => ({
+vi.mock("../useFarcaster.js", () => ({
   useFarcaster: (...args) => mockUseFarcaster(...args),
 }));
 
-const { useWalletAddress } = await import("@/hooks/useWalletAddress.js");
+const { useWalletAddress } = await import("../useWalletAddress.js");
 
 describe("useWalletAddress", () => {
   beforeEach(() => {

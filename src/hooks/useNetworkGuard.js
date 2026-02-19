@@ -1,5 +1,5 @@
 import { useAccount, useSwitchChain } from "wagmi";
-import { activeChain } from "@/config/chains.js";
+import { activeChain } from "../config/chains.js";
 
 /**
  * Guards against wrong network. Returns isWrongNetwork flag

@@ -7,22 +7,22 @@ import { formatUnits, parseUnits, erc20Abi } from "viem";
 import { useReadContract } from "wagmi";
 import { TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
-import { useWalletAddress } from "@/hooks/useWalletAddress.js";
-import { mintclub } from "@/lib/mintclub.js";
+import { useWalletAddress } from "../../hooks/useWalletAddress.js";
+import { mintclub } from "../../lib/mintclub.js";
 import { wei } from "mint.club-v2-sdk";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Tabs } from "@/components/ui/tabs";
-import { AnimatedTabsList, AnimatedTabsTrigger } from "@/components/ui/animated-tabs.jsx";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { getCached, setCached } from "@/lib/immutableCache.js";
+} from "../ui/card";
+import { Tabs } from "../ui/tabs";
+import { AnimatedTabsList, AnimatedTabsTrigger } from "../ui/animated-tabs.jsx";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
+import { Alert, AlertTitle, AlertDescription } from "../ui/alert";
+import { getCached, setCached } from "../../lib/immutableCache.js";
 
 const ONE_TOKEN = parseUnits("1", 18);
 

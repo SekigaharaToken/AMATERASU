@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button.jsx";
+import { Button } from "../ui/button.jsx";
 
 const HUNT_TOWN_URL = "https://hunt.town/project/SEKI";
 

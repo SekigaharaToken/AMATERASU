@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { TestWrapper } from "@/test/wrapper.jsx";
+import { TestWrapper } from "../../../test/wrapper.jsx";
 
 const mockGetBuyEstimation = vi.fn();
 
-vi.mock("@/lib/mintclub.js", () => ({
+vi.mock("../../../lib/mintclub.js", () => ({
   mintclub: {
     network: () => ({
       token: () => ({
@@ -15,7 +15,7 @@ vi.mock("@/lib/mintclub.js", () => ({
 }));
 
 const { PriceDisplay } = await import(
-  "@/components/swap/PriceDisplay.jsx"
+  "../PriceDisplay.jsx"
 );
 
 const defaultTokenConfig = {

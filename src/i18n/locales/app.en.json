@@ -1,0 +1,9 @@
+{
+  "app": {
+    "name": "AMATERASU",
+    "tagline": "Illuminate the Chain."
+  },
+  "home": {
+    "placeholder": "This is your app's home page. Replace this placeholder with your custom experience."
+  }
+}

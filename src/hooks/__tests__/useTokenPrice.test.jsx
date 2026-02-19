@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { I18nextProvider } from "react-i18next";
-import i18n from "@/i18n";
+import i18n from "../../i18n";
 
 // Mock the Mint Club SDK
 const mockGetBuyEstimation = vi.fn();
@@ -18,7 +18,7 @@ vi.mock("mint.club-v2-sdk", () => ({
   },
 }));
 
-const { useTokenPrice } = await import("@/hooks/useTokenPrice.js");
+const { useTokenPrice } = await import("../useTokenPrice.js");
 
 function createWrapper() {
   const qc = new QueryClient({

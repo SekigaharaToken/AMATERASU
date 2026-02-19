@@ -14,8 +14,8 @@ vi.mock("wagmi", () => ({
   useAccount: (...args) => mockUseAccount(...args),
 }));
 
-const { activeChain } = await import("@/config/chains.js");
-const { useNetworkGuard } = await import("@/hooks/useNetworkGuard.js");
+const { activeChain } = await import("../../config/chains.js");
+const { useNetworkGuard } = await import("../useNetworkGuard.js");
 
 describe("useNetworkGuard", () => {
   beforeEach(() => {

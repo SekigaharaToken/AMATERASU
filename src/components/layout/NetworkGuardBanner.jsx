@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { useNetworkGuard } from "@/hooks/useNetworkGuard.js";
-import { Button } from "@/components/ui/button.jsx";
+import { useNetworkGuard } from "../../hooks/useNetworkGuard.js";
+import { Button } from "../ui/button.jsx";
 
 /**
  * Shows a banner when the user is connected to the wrong network.

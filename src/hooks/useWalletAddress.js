@@ -1,5 +1,5 @@
 import { useAccount } from "wagmi";
-import { useFarcaster } from "@/hooks/useFarcaster.js";
+import { useFarcaster } from "./useFarcaster.js";
 
 /**
  * Unified wallet address hook.

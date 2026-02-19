@@ -12,12 +12,12 @@ function createWrapper() {
 const mockGetLogsPaginated = vi.fn();
 const mockGetBlockTimestamps = vi.fn();
 
-vi.mock("@/lib/getLogsPaginated.js", () => ({
+vi.mock("../../lib/getLogsPaginated.js", () => ({
   getLogsPaginated: (...args) => mockGetLogsPaginated(...args),
   getBlockTimestamps: (...args) => mockGetBlockTimestamps(...args),
 }));
 
-vi.mock("@/config/contracts.js", () => ({
+vi.mock("../../config/contracts.js", () => ({
   EAS_ADDRESS: "0x4200000000000000000000000000000000000021",
 }));
 

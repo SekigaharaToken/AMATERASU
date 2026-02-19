@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { parseContractError } from "@/lib/parseContractError.js";
+import { parseContractError } from "../parseContractError.js";
 
 describe("parseContractError", () => {
   it("returns userRejected for wallet rejection", () => {

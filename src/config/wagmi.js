@@ -22,28 +22,34 @@ function isInIframe() {
 
 const projectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || "placeholder";
 
-const rainbowConnectors = connectorsForWallets(
-  [
+/**
+ * Create a wagmi config with app-specific settings.
+ * @param {{ appName?: string }} options
+ */
+export function createWagmiConfig({ appName = "Sekigahara" } = {}) {
+  const rainbowConnectors = connectorsForWallets(
+    [
+      {
+        groupName: "Popular",
+        wallets: [metaMaskWallet, coinbaseWallet, walletConnectWallet],
+      },
+    ],
     {
-      groupName: "Popular",
-      wallets: [metaMaskWallet, coinbaseWallet, walletConnectWallet],
+      appName,
+      projectId,
     },
-  ],
-  {
-    appName: "AMATERASU",
-    projectId,
-  },
-);
+  );
 
-const connectors = isInIframe()
-  ? [farcasterMiniApp(), ...rainbowConnectors]
-  : rainbowConnectors;
+  const connectors = isInIframe()
+    ? [farcasterMiniApp(), ...rainbowConnectors]
+    : rainbowConnectors;
 
-export const wagmiConfig = createConfig({
-  chains: [activeChain],
-  connectors,
-  transports: {
-    [activeChain.id]: http(),
-  },
-  ssr: false,
-});
+  return createConfig({
+    chains: [activeChain],
+    connectors,
+    transports: {
+      [activeChain.id]: http(),
+    },
+    ssr: false,
+  });
+}

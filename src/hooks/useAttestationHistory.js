@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { parseAbiItem } from "viem";
-import { EAS_ADDRESS } from "@/config/contracts.js";
-import { getLogsPaginated, getBlockTimestamps } from "@/lib/getLogsPaginated.js";
+import { EAS_ADDRESS } from "../config/contracts.js";
+import { getLogsPaginated, getBlockTimestamps } from "../lib/getLogsPaginated.js";
 
 const attestedEvent = parseAbiItem(
   "event Attested(address indexed recipient, address indexed attester, bytes32 uid, bytes32 indexed schemaUID)",

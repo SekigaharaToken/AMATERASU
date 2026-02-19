@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { TestWrapper } from "@/test/wrapper.jsx";
+import { TestWrapper } from "../../../test/wrapper.jsx";
 
 const mockBuy = vi.fn();
 const mockSell = vi.fn();
@@ -29,7 +29,7 @@ const mockUseWalletAddress = vi.fn(() => ({
   canTransact: true,
 }));
 
-vi.mock("@/hooks/useWalletAddress.js", () => ({
+vi.mock("../../../hooks/useWalletAddress.js", () => ({
   useWalletAddress: (...args) => mockUseWalletAddress(...args),
 }));
 
@@ -37,7 +37,7 @@ vi.mock("wagmi", () => ({
   useReadContract: () => ({ data: undefined }),
 }));
 
-const { SwapPanel } = await import("@/components/swap/SwapPanel.jsx");
+const { SwapPanel } = await import("../SwapPanel.jsx");
 
 const defaultTokenConfig = {
   key: "token",

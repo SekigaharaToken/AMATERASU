@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Separator } from "@/components/ui/separator.jsx";
+import { Separator } from "../ui/separator.jsx";
 import { version } from "../../../package.json";
 
 /* global __COMMIT_HASH__ */

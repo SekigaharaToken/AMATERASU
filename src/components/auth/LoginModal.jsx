@@ -16,12 +16,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog.jsx";
-import { Button } from "@/components/ui/button.jsx";
+} from "../ui/dialog.jsx";
+import { Button } from "../ui/button.jsx";
 import { useTranslation } from "react-i18next";
-import { useLoginModal } from "@/hooks/useLoginModal.js";
-import { useFarcasterSignIn } from "@/hooks/useFarcasterSignIn.js";
-import { useFarcaster } from "@/hooks/useFarcaster.js";
+import { useLoginModal } from "../../hooks/useLoginModal.js";
+import { useFarcasterSignIn } from "../../hooks/useFarcasterSignIn.js";
+import { useFarcaster } from "../../hooks/useFarcaster.js";
 
 export const LoginModal = ({ onSuccess }) => {
   const { t } = useTranslation();

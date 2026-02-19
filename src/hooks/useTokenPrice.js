@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { parseUnits } from "viem";
-import { mintclub } from "@/lib/mintclub.js";
-import { SWAP_TOKEN_ADDRESS, SWAP_NETWORK } from "@/config/contracts.js";
+import { mintclub } from "../lib/mintclub.js";
+import { SWAP_TOKEN_ADDRESS, SWAP_NETWORK } from "../config/contracts.js";
 
 const ONE_TOKEN = parseUnits("1", 18);
 

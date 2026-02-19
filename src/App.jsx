@@ -1,15 +1,15 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Header } from "@/components/layout/Header.jsx";
-import { Footer } from "@/components/layout/Footer.jsx";
-import { PageWrapper } from "@/components/layout/PageWrapper.jsx";
-import { NetworkGuardBanner } from "@/components/layout/NetworkGuardBanner.jsx";
-import { ErrorBoundary } from "@/components/layout/ErrorBoundary.jsx";
-import { LoginModal } from "@/components/auth/LoginModal.jsx";
-import { Skeleton } from "@/components/ui/skeleton.jsx";
-import HomePage from "@/pages/HomePage.jsx";
+import { Header } from "./components/layout/Header.jsx";
+import { Footer } from "./components/layout/Footer.jsx";
+import { PageWrapper } from "./components/layout/PageWrapper.jsx";
+import { NetworkGuardBanner } from "./components/layout/NetworkGuardBanner.jsx";
+import { ErrorBoundary } from "./components/layout/ErrorBoundary.jsx";
+import { LoginModal } from "./components/auth/LoginModal.jsx";
+import { Skeleton } from "./components/ui/skeleton.jsx";
+import HomePage from "./pages/HomePage.jsx";
 
-const SwapPage = lazy(() => import("@/pages/SwapPage.jsx"));
+const SwapPage = lazy(() => import("./pages/SwapPage.jsx"));
 
 function App() {
   return (

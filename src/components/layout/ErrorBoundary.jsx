@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { useTranslation } from "react-i18next";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.jsx";
-import { Button } from "@/components/ui/button.jsx";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card.jsx";
+import { Button } from "../ui/button.jsx";
 
 function ErrorFallback() {
   const { t } = useTranslation();

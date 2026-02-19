@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "motion/react";
-import { BackSekiLink } from "@/components/layout/BackSekiLink.jsx";
-import { fadeInUp, staggerDelay } from "@/lib/motion.js";
+import { BackSekiLink } from "../components/layout/BackSekiLink.jsx";
+import { fadeInUp, staggerDelay } from "../lib/motion.js";
 
 export default function HomePage() {
   const { t } = useTranslation();

@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next";
 import NumberFlow from "@number-flow/react";
 import { formatUnits, parseUnits } from "viem";
 import { useQuery } from "@tanstack/react-query";
-import { mintclub } from "@/lib/mintclub.js";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { mintclub } from "../../lib/mintclub.js";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Skeleton } from "../ui/skeleton";
 
 const ONE_TOKEN = parseUnits("1", 18);
 const priceFormat = { minimumFractionDigits: 8, maximumFractionDigits: 8 };

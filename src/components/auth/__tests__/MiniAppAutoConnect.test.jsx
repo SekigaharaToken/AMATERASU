@@ -25,7 +25,7 @@ vi.mock("@farcaster/miniapp-sdk", () => ({
 }));
 
 const { MiniAppAutoConnect } = await import(
-  "@/components/auth/MiniAppAutoConnect.jsx"
+  "../MiniAppAutoConnect.jsx"
 );
 
 describe("MiniAppAutoConnect", () => {

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "motion/react";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { AnimatedTabsList, AnimatedTabsTrigger } from "@/components/ui/animated-tabs.jsx";
-import { PriceDisplay } from "@/components/swap/PriceDisplay.jsx";
-import { SwapPanel } from "@/components/swap/SwapPanel.jsx";
-import { BackSekiLink } from "@/components/layout/BackSekiLink.jsx";
-import { SWAP_TOKENS } from "@/config/contracts.js";
-import { fadeInUp, staggerDelay, tabContent } from "@/lib/motion.js";
+import { Tabs, TabsContent } from "../components/ui/tabs";
+import { AnimatedTabsList, AnimatedTabsTrigger } from "../components/ui/animated-tabs.jsx";
+import { PriceDisplay } from "../components/swap/PriceDisplay.jsx";
+import { SwapPanel } from "../components/swap/SwapPanel.jsx";
+import { BackSekiLink } from "../components/layout/BackSekiLink.jsx";
+import { SWAP_TOKENS } from "../config/contracts.js";
+import { fadeInUp, staggerDelay, tabContent } from "../lib/motion.js";
 
 export default function SwapPage() {
   const { t } = useTranslation();

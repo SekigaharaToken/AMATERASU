@@ -13,7 +13,7 @@ vi.mock("@farcaster/miniapp-sdk", () => ({
   },
 }));
 
-vi.mock("@/hooks/useMiniAppContext.js", () => ({
+vi.mock("../useMiniAppContext.js", () => ({
   useMiniAppContext: (...args) => mockUseMiniAppContext(...args),
 }));
 

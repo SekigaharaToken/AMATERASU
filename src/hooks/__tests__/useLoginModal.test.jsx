@@ -1,7 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { useLoginModal } from "../useLoginModal.js";
-import { LoginModalProvider } from "@/context/LoginModalContext.jsx";
+import { LoginModalProvider } from "../../context/LoginModalContext.jsx";
 
 const wrapper = ({ children }) => (
   <LoginModalProvider>{children}</LoginModalProvider>

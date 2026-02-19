@@ -4,9 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import { Sun, Moon, Globe, LogOut } from "lucide-react";
 import { useAccount, useDisconnect } from "wagmi";
 import { createPublicClient, http, formatUnits } from "viem";
-import { Button } from "@/components/ui/button.jsx";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar.jsx";
-import { Skeleton } from "@/components/ui/skeleton.jsx";
+import { Button } from "../ui/button.jsx";
+import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar.jsx";
+import { Skeleton } from "../ui/skeleton.jsx";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,14 +14,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu.jsx";
-import { useTheme } from "@/hooks/useTheme.js";
-import { useLoginModal } from "@/hooks/useLoginModal.js";
-import { useFarcaster } from "@/hooks/useFarcaster.js";
-import { useMiniAppContext } from "@/hooks/useMiniAppContext.js";
-import { activeChain } from "@/config/chains.js";
-import { SWAP_TOKENS } from "@/config/contracts.js";
-import { cn } from "@/lib/utils";
+} from "../ui/dropdown-menu.jsx";
+import { useTheme } from "../../hooks/useTheme.js";
+import { useLoginModal } from "../../hooks/useLoginModal.js";
+import { useFarcaster } from "../../hooks/useFarcaster.js";
+import { useMiniAppContext } from "../../hooks/useMiniAppContext.js";
+import { activeChain } from "../../config/chains.js";
+import { useEngineConfig } from "../../context/EngineConfigContext.jsx";
+import { cn } from "../../lib/utils";
 
 const client = createPublicClient({ chain: activeChain, transport: http() });
 
@@ -55,6 +55,7 @@ export const Header = () => {
   const { openLoginModal } = useLoginModal();
   const { isAuthenticated, profile, signOut } = useFarcaster();
   const { context } = useMiniAppContext();
+  const { swapTokens = [] } = useEngineConfig();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const location = useLocation();
@@ -71,14 +72,14 @@ export const Header = () => {
     .toUpperCase();
 
   const [balances, setBalances] = useState(() =>
-    Object.fromEntries(SWAP_TOKENS.map((t) => [t.key, null]))
+    Object.fromEntries(swapTokens.map((t) => [t.key, null]))
   );
   const [balancesLoading, setBalancesLoading] = useState(false);
 
   function fetchBalances() {
     if (!address) return;
     setBalancesLoading(true);
-    const reads = SWAP_TOKENS.map((token) =>
+    const reads = swapTokens.map((token) =>
       token.address
         ? client.readContract({ address: token.address, abi: erc20BalanceAbi, functionName: "balanceOf", args: [address] })
         : Promise.resolve(0n)
@@ -86,13 +87,13 @@ export const Header = () => {
     Promise.all(reads)
       .then((results) => {
         const newBalances = {};
-        SWAP_TOKENS.forEach((token, i) => { newBalances[token.key] = results[i]; });
+        swapTokens.forEach((token, i) => { newBalances[token.key] = results[i]; });
         setBalances(newBalances);
         setBalancesLoading(false);
       })
       .catch(() => {
         const fallback = {};
-        SWAP_TOKENS.forEach((token) => { fallback[token.key] = 0n; });
+        swapTokens.forEach((token) => { fallback[token.key] = 0n; });
         setBalances(fallback);
         setBalancesLoading(false);
       });
@@ -187,7 +188,7 @@ export const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="min-w-44">
                 <DropdownMenuLabel>{displayName}</DropdownMenuLabel>
-                {SWAP_TOKENS.map((token) => (
+                {swapTokens.map((token) => (
                   <DropdownMenuItem key={token.key} disabled className="text-xs text-muted-foreground">
                     <span className="font-mono">{token.label}</span>: {balancesLoading ? <Skeleton className="ml-1 inline-block h-3 w-16" /> : formatBalance(balances[token.key] ?? 0n)}
                   </DropdownMenuItem>

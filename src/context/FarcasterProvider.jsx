@@ -9,10 +9,12 @@
 import { useEffect, useMemo, useCallback, useState } from "react";
 import { useProfile, useSignIn } from "@farcaster/auth-kit";
 import FarcasterContext from "./farcasterContext.js";
-
-const PROFILE_STORAGE_KEY = "amaterasu:farcaster_profile";
+import { useEngineConfig } from "./EngineConfigContext.jsx";
 
 export const FarcasterProvider = ({ children }) => {
+  const { storagePrefix = "engine" } = useEngineConfig();
+  const profileStorageKey = storagePrefix + ":farcaster_profile";
+
   const { isAuthenticated: isAuthKitAuthenticated, profile: authKitProfile } =
     useProfile();
   const { signOut } = useSignIn({});
@@ -21,7 +23,7 @@ export const FarcasterProvider = ({ children }) => {
   // Restore profile from sessionStorage on mount
   const [storedProfile, setStoredProfile] = useState(() => {
     try {
-      const stored = sessionStorage.getItem(PROFILE_STORAGE_KEY);
+      const stored = sessionStorage.getItem(profileStorageKey);
       if (stored) return JSON.parse(stored);
     } catch {
       // noop
@@ -35,25 +37,25 @@ export const FarcasterProvider = ({ children }) => {
       setStoredProfile(authKitProfile);
       try {
         sessionStorage.setItem(
-          PROFILE_STORAGE_KEY,
+          profileStorageKey,
           JSON.stringify(authKitProfile),
         );
       } catch {
         // noop
       }
     }
-  }, [isAuthKitAuthenticated, authKitProfile]);
+  }, [isAuthKitAuthenticated, authKitProfile, profileStorageKey]);
 
   // Clear stored profile on explicit sign-out
   const handleSignOut = useCallback(() => {
     setStoredProfile(null);
     try {
-      sessionStorage.removeItem(PROFILE_STORAGE_KEY);
+      sessionStorage.removeItem(profileStorageKey);
     } catch {
       // noop
     }
     signOut();
-  }, [signOut]);
+  }, [signOut, profileStorageKey]);
 
   // Use auth-kit profile when live, fall back to stored profile
   const isAuthenticated = isAuthKitAuthenticated || storedProfile !== null;

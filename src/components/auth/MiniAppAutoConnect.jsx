@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useConnect, useAccount } from "wagmi";
 import sdk from "@farcaster/miniapp-sdk";
-import { useMiniAppContext } from "@/hooks/useMiniAppContext.js";
+import { useMiniAppContext } from "../../hooks/useMiniAppContext.js";
 
 /**
  * Auto-connects the Farcaster wallet when running inside a MiniApp iframe.

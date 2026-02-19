@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
-import { TestWrapper } from "@/test/wrapper.jsx";
+import { TestWrapper } from "../../../test/wrapper.jsx";
 import { Footer } from "../Footer.jsx";
 
 describe("Footer", () => {

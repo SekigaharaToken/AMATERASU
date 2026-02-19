@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { TestWrapper } from "@/test/wrapper.jsx";
+import { TestWrapper } from "../../../test/wrapper.jsx";
 
 // Mock wagmi hooks
 const mockDisconnect = vi.fn();
@@ -28,7 +28,7 @@ const mockUseFarcaster = vi.fn(() => ({
   profile: null,
   signOut: mockSignOut,
 }));
-vi.mock("@/hooks/useFarcaster.js", () => ({
+vi.mock("../../../hooks/useFarcaster.js", () => ({
   useFarcaster: (...args) => mockUseFarcaster(...args),
 }));
 

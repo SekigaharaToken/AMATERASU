@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { TestWrapper } from "@/test/wrapper.jsx";
+import { TestWrapper } from "../../test/wrapper.jsx";
 
-vi.mock("@/hooks/useWalletAddress.js", () => ({
+vi.mock("../../hooks/useWalletAddress.js", () => ({
   useWalletAddress: () => ({ address: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266", isConnected: true, canTransact: true }),
 }));
 
@@ -10,7 +10,7 @@ vi.mock("wagmi", () => ({
   useReadContract: () => ({ data: undefined }),
 }));
 
-vi.mock("@/lib/mintclub.js", () => ({
+vi.mock("../../lib/mintclub.js", () => ({
   mintclub: {
     network: () => ({
       token: () => ({
@@ -35,7 +35,7 @@ vi.mock("mint.club-v2-sdk", () => ({
   wei: (num) => BigInt(num) * 10n ** 18n,
 }));
 
-const SwapPage = (await import("@/pages/SwapPage.jsx")).default;
+const SwapPage = (await import("../SwapPage.jsx")).default;
 
 describe("SwapPage", () => {
   it("renders the page title", () => {

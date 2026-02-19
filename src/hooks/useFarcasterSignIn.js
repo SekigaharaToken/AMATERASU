@@ -8,7 +8,7 @@
 
 import { useRef, useCallback, useState, useEffect } from "react";
 import { useSignIn } from "@farcaster/auth-kit";
-import { useFarcaster } from "@/hooks/useFarcaster.js";
+import { useFarcaster } from "./useFarcaster.js";
 
 export const useFarcasterSignIn = ({ onSuccess, onError } = {}) => {
   const { generateNonce } = useFarcaster();

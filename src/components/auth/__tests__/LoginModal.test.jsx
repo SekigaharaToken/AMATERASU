@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { TestWrapper } from "@/test/wrapper.jsx";
+import { TestWrapper } from "../../../test/wrapper.jsx";
 import { LoginModal } from "../LoginModal.jsx";
 
 // Mock wagmi
@@ -10,7 +10,7 @@ vi.mock("wagmi", () => ({
 }));
 
 // Mock useFarcaster
-vi.mock("@/hooks/useFarcaster.js", () => ({
+vi.mock("../../../hooks/useFarcaster.js", () => ({
   useFarcaster: () => ({ isAuthenticated: false, profile: null }),
 }));
 
@@ -20,7 +20,7 @@ vi.mock("@rainbow-me/rainbowkit", () => ({
 }));
 
 // Mock useFarcasterSignIn
-vi.mock("@/hooks/useFarcasterSignIn.js", () => ({
+vi.mock("../../../hooks/useFarcasterSignIn.js", () => ({
   useFarcasterSignIn: () => ({
     handleSignInClick: vi.fn(),
     handleCancel: vi.fn(),
