@@ -34,14 +34,14 @@ const priceFormat = { minimumFractionDigits: 8, maximumFractionDigits: 8 };
 
 function getAlertMessage({ mode, supplyIsZero, supplyIsMax, buyExceedsSupply, exceedsBalance, userBalance, sellAtLoss, t }) {
   const title = t("swap.swapWarningTitle");
-  if (mode === "sell" && supplyIsZero) return { title, desc: t("swap.noSupply") };
-  if (mode === "buy" && supplyIsMax) return { title, desc: t("swap.maxSupply") };
-  if (buyExceedsSupply) return { title, desc: t("swap.exceedsSupply") };
+  if (mode === "sell" && supplyIsZero) return { title, desc: t("swap.noSupply"), variant: "destructive" };
+  if (mode === "buy" && supplyIsMax) return { title, desc: t("swap.maxSupply"), variant: "destructive" };
+  if (buyExceedsSupply) return { title, desc: t("swap.exceedsSupply"), variant: "destructive" };
   if (exceedsBalance) {
     const balance = parseFloat(formatUnits(userBalance, 18)).toFixed(2);
-    return { title, desc: t("swap.exceedsBalance", { balance }) };
+    return { title, desc: t("swap.exceedsBalance", { balance }), variant: "destructive" };
   }
-  if (sellAtLoss) return { title, desc: t("swap.sellWarning") };
+  if (sellAtLoss) return { title: t("swap.sellWarningTitle"), desc: t("swap.sellWarning"), variant: "default" };
   return null;
 }
 
@@ -59,7 +59,7 @@ function SwapAlert({ mode, supplyIsZero, supplyIsMax, buyExceedsSupply, exceedsB
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 25 }}
         >
-          <Alert variant="destructive">
+          <Alert variant={alert.variant}>
             <TriangleAlert className="size-4" />
             <AlertTitle>{alert.title}</AlertTitle>
             <AlertDescription>{alert.desc}</AlertDescription>
@@ -221,13 +221,14 @@ export function SwapPanel({ tokenConfig }) {
     && (currentSupply + parsedAmount > maxSupply);
   const exceedsBalance = mode === "sell" && parsedAmount && userBalance != null && parsedAmount > userBalance;
 
-  // Detect if per-token sell refund is below the current buy price
+  // Warn if per-token sell refund is >10% below the current buy price
   const buyPrice = priceData?.buyPrice;
   const sellAtLoss = mode === "sell"
     && estimation
     && parsedAmount
     && buyPrice != null
-    && (estimation.cost * ONE_TOKEN / parsedAmount) < buyPrice;
+    && buyPrice > 0n
+    && (estimation.cost * ONE_TOKEN / parsedAmount) < (buyPrice * 90n / 100n);
 
   // Track whether the estimation rows have already stagger-animated
   const hasStaggered = useRef(false);
@@ -313,7 +314,6 @@ export function SwapPanel({ tokenConfig }) {
             || (mode === "buy" && supplyIsMax)
             || buyExceedsSupply
             || exceedsBalance
-            || sellAtLoss
           }
         >
           {mode === "buy" ? t(tokenConfig.buyKey) : t(tokenConfig.sellKey)}
