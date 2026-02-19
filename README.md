@@ -74,6 +74,24 @@ Edit `public/.well-known/farcaster.json`:
 - Update all URLs to your deployment domain
 - Set your app name and description
 
+## Using as a Package
+
+AMATERASU can also be consumed as `@sekigahara/engine` via npm:
+
+```bash
+npm install github:SekigaharaToken/AMATERASU
+```
+
+Consumer apps must add a `@source` directive in their CSS so Tailwind v4 scans the engine source for class names:
+
+```css
+/* In your app's index.css — path is relative to this file */
+@import "@sekigahara/engine/css/base.css";
+@source "../node_modules/@sekigahara/engine/src";
+```
+
+See DOJO for a complete consumer example.
+
 ## Scripts
 
 ```bash
