@@ -30,6 +30,7 @@
     "priceSeki": "현재 $SEKI 가격",
     "amount": "수량",
     "cost": "비용",
+    "refund": "환불액",
     "receive": "수령액",
     "fee": "수수료",
     "totalCost": "총 비용",

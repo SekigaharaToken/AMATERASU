@@ -100,12 +100,21 @@ function EstimationRows({ estimation, mode, tokenConfig, animate, t }) {
     ? { initial: { opacity: 0, y: 4 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.2, delay: 0.2 + i * 0.1 } }
     : {};
 
+  // Buy: cost = reserve needed (before fee), royalty = mint fee, total = cost + royalty
+  // Sell: cost = net refund (after fee deducted), royalty = burn fee
+  //       gross = cost + royalty, you receive = cost
+  const isSell = mode === "sell";
+
   return (
     <div className="flex flex-col gap-1">
       <Row className="flex justify-between" {...stagger(0)}>
-        <span className="text-muted-foreground">{t("swap.cost")}</span>
+        <span className="text-muted-foreground">
+          {isSell ? t("swap.refund") : t("swap.cost")}
+        </span>
         <span className="font-medium">
-          <span className="font-mono tabular-nums"><NumberFlow value={toPrice(estimation.cost)} format={priceFormat} /></span> {tokenConfig.reserveLabel}
+          <span className="font-mono tabular-nums">
+            <NumberFlow value={toPrice(isSell ? estimation.cost + estimation.royalty : estimation.cost)} format={priceFormat} />
+          </span> {tokenConfig.reserveLabel}
         </span>
       </Row>
       <Row className="flex justify-between" {...stagger(1)}>
@@ -116,10 +125,12 @@ function EstimationRows({ estimation, mode, tokenConfig, animate, t }) {
       </Row>
       <Row className="flex justify-between border-t pt-1" {...stagger(2)}>
         <span className="text-muted-foreground font-medium">
-          {mode === "buy" ? t("swap.totalCost") : t("swap.receive")}
+          {isSell ? t("swap.receive") : t("swap.totalCost")}
         </span>
         <span className="font-bold">
-          <span className="font-mono tabular-nums"><NumberFlow value={toPrice(estimation.cost + estimation.royalty)} format={priceFormat} /></span> {tokenConfig.reserveLabel}
+          <span className="font-mono tabular-nums">
+            <NumberFlow value={toPrice(isSell ? estimation.cost : estimation.cost + estimation.royalty)} format={priceFormat} />
+          </span> {tokenConfig.reserveLabel}
         </span>
       </Row>
     </div>

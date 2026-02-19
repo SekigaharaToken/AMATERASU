@@ -30,6 +30,7 @@
     "priceSeki": "Current $SEKI Price",
     "amount": "Amount",
     "cost": "Cost",
+    "refund": "Refund",
     "receive": "You receive",
     "fee": "Fee",
     "totalCost": "Total Cost",

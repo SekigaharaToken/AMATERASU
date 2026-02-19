@@ -30,6 +30,7 @@
     "priceSeki": "現在の$SEKI価格",
     "amount": "数量",
     "cost": "コスト",
+    "refund": "返金額",
     "receive": "受取額",
     "fee": "手数料",
     "totalCost": "合計コスト",
