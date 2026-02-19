@@ -5,6 +5,7 @@ import { TestWrapper } from "../../../test/wrapper.jsx";
 const mockGetBuyEstimation = vi.fn();
 
 vi.mock("../../../lib/mintclub.js", () => ({
+  ensureInitialized: vi.fn(),
   mintclub: {
     network: () => ({
       token: () => ({

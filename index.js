@@ -57,7 +57,7 @@ export { LoginModalProvider } from "./src/context/LoginModalContext.jsx";
 
 // Lib
 export { cn } from "./src/lib/utils.js";
-export { mintclub } from "./src/lib/mintclub.js";
+export { mintclub, ensureInitialized as ensureMintclubInitialized } from "./src/lib/mintclub.js";
 export { parseContractError } from "./src/lib/parseContractError.js";
 export { fadeInUp, staggerDelay, tapSpring, tabContent } from "./src/lib/motion.js";
 export { getLogsPaginated, getBlockTimestamps } from "./src/lib/getLogsPaginated.js";

@@ -8,7 +8,7 @@ import { useReadContract } from "wagmi";
 import { TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
 import { useWalletAddress } from "../../hooks/useWalletAddress.js";
-import { mintclub } from "../../lib/mintclub.js";
+import { mintclub, ensureInitialized } from "../../lib/mintclub.js";
 import { wei } from "mint.club-v2-sdk";
 import {
   Card,
@@ -136,6 +136,7 @@ export function SwapPanel({ tokenConfig }) {
   const [amount, setAmount] = useState("");
   const [isPending, setIsPending] = useState(false);
 
+  ensureInitialized();
   const token = mintclub.network(tokenConfig.network).token(tokenConfig.address);
 
   const parsedAmount = amount && Number(amount) > 0

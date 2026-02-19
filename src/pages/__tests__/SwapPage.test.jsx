@@ -11,6 +11,7 @@ vi.mock("wagmi", () => ({
 }));
 
 vi.mock("../../lib/mintclub.js", () => ({
+  ensureInitialized: vi.fn(),
   mintclub: {
     network: () => ({
       token: () => ({

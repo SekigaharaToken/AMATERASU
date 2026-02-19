@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { parseUnits } from "viem";
-import { mintclub } from "../lib/mintclub.js";
+import { mintclub, ensureInitialized } from "../lib/mintclub.js";
 import { SWAP_TOKEN_ADDRESS, SWAP_NETWORK } from "../config/contracts.js";
 
 const ONE_TOKEN = parseUnits("1", 18);
@@ -18,6 +18,7 @@ export function useTokenPrice() {
   } = useQuery({
     queryKey: ["tokenPrice", SWAP_TOKEN_ADDRESS],
     queryFn: async () => {
+      ensureInitialized();
       const token = mintclub.network(SWAP_NETWORK).token(SWAP_TOKEN_ADDRESS);
       const [reserveAmount, royalty] = await token.getBuyEstimation(ONE_TOKEN);
       return { buyPrice: reserveAmount, royalty };

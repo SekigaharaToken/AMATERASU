@@ -4,33 +4,37 @@
  * The SDK's built-in public RPC list for Base fails from browsers
  * (CORS blocks, 403s, 401s). We inject a working publicClient
  * for both Base mainnet and Base Sepolia so all SDK calls succeed.
+ *
+ * Initialization is lazy to avoid side effects at import time
+ * (which breaks test environments that mock viem/SDK).
  */
 
 import { createPublicClient, http } from "viem";
 import { base, baseSepolia } from "viem/chains";
 import { mintclub } from "mint.club-v2-sdk";
 
-const alchemyKey = import.meta.env.VITE_ALCHEMY_API_KEY;
+let initialized = false;
 
-const baseMainnetRpc = alchemyKey
-  ? `https://base-mainnet.g.alchemy.com/v2/${alchemyKey}`
-  : "https://base-rpc.publicnode.com";
+function ensureInitialized() {
+  if (initialized) return;
+  initialized = true;
 
-const baseSepoliaRpc = alchemyKey
-  ? `https://base-sepolia.g.alchemy.com/v2/${alchemyKey}`
-  : "https://base-sepolia-rpc.publicnode.com";
+  const alchemyKey = import.meta.env.VITE_ALCHEMY_API_KEY;
 
-const baseClient = createPublicClient({
-  chain: base,
-  transport: http(baseMainnetRpc),
-});
+  const baseMainnetRpc = alchemyKey
+    ? `https://base-mainnet.g.alchemy.com/v2/${alchemyKey}`
+    : "https://base-rpc.publicnode.com";
 
-const baseSepoliaClient = createPublicClient({
-  chain: baseSepolia,
-  transport: http(baseSepoliaRpc),
-});
+  const baseSepoliaRpc = alchemyKey
+    ? `https://base-sepolia.g.alchemy.com/v2/${alchemyKey}`
+    : "https://base-sepolia-rpc.publicnode.com";
 
-mintclub.withPublicClient(baseClient);
-mintclub.withPublicClient(baseSepoliaClient);
+  mintclub.withPublicClient(
+    createPublicClient({ chain: base, transport: http(baseMainnetRpc) }),
+  );
+  mintclub.withPublicClient(
+    createPublicClient({ chain: baseSepolia, transport: http(baseSepoliaRpc) }),
+  );
+}
 
-export { mintclub };
+export { mintclub, ensureInitialized };

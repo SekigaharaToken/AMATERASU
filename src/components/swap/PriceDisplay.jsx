@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import NumberFlow from "@number-flow/react";
 import { formatUnits, parseUnits } from "viem";
 import { useQuery } from "@tanstack/react-query";
-import { mintclub } from "../../lib/mintclub.js";
+import { mintclub, ensureInitialized } from "../../lib/mintclub.js";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 
@@ -22,6 +22,7 @@ export function PriceDisplay({ tokenConfig }) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["tokenPrice", tokenConfig.address],
     queryFn: async () => {
+      ensureInitialized();
       const token = mintclub.network(tokenConfig.network).token(tokenConfig.address);
       const [reserveAmount, royalty] = await token.getBuyEstimation(ONE_TOKEN);
       return { buyPrice: reserveAmount, royalty };
