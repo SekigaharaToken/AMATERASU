@@ -221,14 +221,7 @@ export function SwapPanel({ tokenConfig }) {
     && (currentSupply + parsedAmount > maxSupply);
   const exceedsBalance = mode === "sell" && parsedAmount && userBalance != null && parsedAmount > userBalance;
 
-  // Warn if per-token sell refund is >10% below the current buy price
-  const buyPrice = priceData?.buyPrice;
-  const sellAtLoss = mode === "sell"
-    && estimation
-    && parsedAmount
-    && buyPrice != null
-    && buyPrice > 0n
-    && (estimation.cost * ONE_TOKEN / parsedAmount) < (buyPrice * 90n / 100n);
+  const sellAtLoss = false;
 
   // Track whether the estimation rows have already stagger-animated
   const hasStaggered = useRef(false);
