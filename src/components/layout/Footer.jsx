@@ -11,7 +11,7 @@ export const Footer = () => {
   const appVersion = configVersion || `v${engineVersion}-${__COMMIT_HASH__}`;
 
   return (
-    <footer className="mt-auto">
+    <footer className="mt-auto hidden md:block">
       <Separator />
       <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-4 text-sm text-muted-foreground">
         <span>{t("footer.builtOn")}</span>
