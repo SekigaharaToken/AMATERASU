@@ -134,6 +134,19 @@ export const Header = () => {
             >
               {t("nav.swap")}
             </Link>
+            {import.meta.env.DEV && (
+              <Link
+                to="/admin"
+                className={cn(
+                  "text-sm transition-colors hover:text-foreground",
+                  location.pathname === "/admin"
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground",
+                )}
+              >
+                Admin
+              </Link>
+            )}
           </nav>
         </div>
 

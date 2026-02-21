@@ -1,5 +1,31 @@
 export const merkleDistributorAbi = [
   {
+    name: "distributions",
+    type: "function",
+    stateMutability: "view",
+    inputs: [{ name: "distributionId", type: "uint256" }],
+    outputs: [
+      { name: "token", type: "address" },
+      { name: "isERC20", type: "bool" },
+      { name: "amountPerClaim", type: "uint176" },
+      { name: "walletCount", type: "uint40" },
+      { name: "claimCount", type: "uint40" },
+      { name: "startTime", type: "uint40" },
+      { name: "endTime", type: "uint40" },
+      { name: "owner", type: "address" },
+      { name: "merkleRoot", type: "bytes32" },
+      { name: "title", type: "string" },
+      { name: "ipfsCID", type: "string" },
+    ],
+  },
+  {
+    name: "getAmountClaimed",
+    type: "function",
+    stateMutability: "view",
+    inputs: [{ name: "distributionId", type: "uint256" }],
+    outputs: [{ name: "", type: "uint256" }],
+  },
+  {
     name: "createDistribution",
     type: "function",
     stateMutability: "nonpayable",

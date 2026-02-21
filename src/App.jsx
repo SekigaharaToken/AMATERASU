@@ -10,6 +10,9 @@ import { Skeleton } from "./components/ui/skeleton.jsx";
 import HomePage from "./pages/HomePage.jsx";
 
 const SwapPage = lazy(() => import("./pages/SwapPage.jsx"));
+const AdminPage = import.meta.env.DEV
+  ? lazy(() => import("./pages/AdminPage.jsx"))
+  : null;
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/swap" element={<SwapPage />} />
+              {import.meta.env.DEV && AdminPage && (
+                <Route path="/admin" element={<AdminPage />} />
+              )}
             </Routes>
           </Suspense>
         </PageWrapper>

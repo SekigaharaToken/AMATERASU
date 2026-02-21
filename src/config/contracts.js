@@ -55,6 +55,16 @@ const hasMainnetToken = APP_TOKEN_ADDRESS && chainId === 8453;
 export const SWAP_TOKEN_ADDRESS = hasMainnetToken ? APP_TOKEN_ADDRESS : PLACEHOLDER_SWAP_TOKEN;
 export const SWAP_NETWORK = hasMainnetToken ? MINT_CLUB_NETWORK : PLACEHOLDER_SWAP_NETWORK;
 
+// Admin
+export const OPERATOR_ADDRESS = getEnv("VITE_OPERATOR_ADDRESS", "").toLowerCase();
+export const KAMON_TOKEN_ADDRESS = getEnv("VITE_KAMON_TOKEN_ADDRESS", "").toLowerCase();
+
+// DOJO
+export const DOJO_RESOLVER_ADDRESS = getEnv("VITE_DOJO_RESOLVER_ADDRESS", "").toLowerCase();
+export const DOJO_SCHEMA_UID = getEnv("VITE_DOJO_SCHEMA_UID", "").toLowerCase();
+export const DOJO_TOKEN_ADDRESS = getEnv("VITE_DOJO_TOKEN_ADDRESS", "").toLowerCase();
+export const DOJO_FAUCET_ADDRESS = getEnv("VITE_DOJO_FAUCET_ADDRESS", "").toLowerCase();
+
 // Token configs for the swap UI tabs
 const hasMainnetSeki = SEKI_TOKEN_ADDRESS && chainId === 8453;
 export const SEKI_SWAP_TOKEN_ADDRESS = hasMainnetSeki ? SEKI_TOKEN_ADDRESS : PLACEHOLDER_SWAP_TOKEN;
