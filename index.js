@@ -10,6 +10,7 @@ export { PageWrapper } from "./src/components/layout/PageWrapper.jsx";
 export { NetworkGuardBanner } from "./src/components/layout/NetworkGuardBanner.jsx";
 export { BackSekiLink } from "./src/components/layout/BackSekiLink.jsx";
 export { ErrorBoundary } from "./src/components/layout/ErrorBoundary.jsx";
+export { BottomNav } from "./src/components/layout/BottomNav.jsx";
 
 // Components — Auth
 export { LoginModal } from "./src/components/auth/LoginModal.jsx";
