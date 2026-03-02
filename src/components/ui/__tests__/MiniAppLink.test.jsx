@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { MiniAppLink } from "../miniapp-link.jsx";
 
 const mockOpenUrl = vi.fn();
 const mockUseMiniAppContext = vi.fn(() => ({
@@ -20,10 +19,12 @@ vi.mock("../../../hooks/useMiniAppContext.js", () => ({
 describe("MiniAppLink", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.resetModules();
     mockUseMiniAppContext.mockReturnValue({ isInMiniApp: false });
   });
 
-  it("renders <a> with target=_blank outside MiniApp", () => {
+  it("renders <a> with target=_blank outside MiniApp", async () => {
+    const { MiniAppLink } = await import("../miniapp-link.jsx");
     render(<MiniAppLink href="https://example.com">Click me</MiniAppLink>);
     const link = screen.getByRole("link", { name: "Click me" });
     expect(link).toHaveAttribute("href", "https://example.com");
@@ -31,32 +32,48 @@ describe("MiniAppLink", () => {
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
-  it("renders <a> without target attribute inside MiniApp", () => {
+  it("renders <a> without target attribute inside MiniApp", async () => {
     mockUseMiniAppContext.mockReturnValue({ isInMiniApp: true });
+    const { MiniAppLink } = await import("../miniapp-link.jsx");
     render(<MiniAppLink href="https://example.com">Click me</MiniAppLink>);
     const link = screen.getByRole("link", { name: "Click me" });
     expect(link).not.toHaveAttribute("target");
   });
 
-  it("calls sdk.actions.openUrl and preventDefault inside MiniApp", () => {
+  it("does NOT call sdk.actions.openUrl on iOS MiniApp (lets webview handle it)", async () => {
     mockUseMiniAppContext.mockReturnValue({ isInMiniApp: true });
-    render(<MiniAppLink href="https://example.com">Click me</MiniAppLink>);
-    const link = screen.getByRole("link", { name: "Click me" });
-    const event = new MouseEvent("click", { bubbles: true, cancelable: true });
-    const preventDefaultSpy = vi.spyOn(event, "preventDefault");
-    fireEvent(link, event);
-    expect(preventDefaultSpy).toHaveBeenCalled();
-    expect(mockOpenUrl).toHaveBeenCalledWith("https://example.com");
-  });
-
-  it("does NOT call sdk.actions.openUrl outside MiniApp", () => {
+    // jsdom UA is not Android → simulates iOS
+    const { MiniAppLink } = await import("../miniapp-link.jsx");
     render(<MiniAppLink href="https://example.com">Click me</MiniAppLink>);
     const link = screen.getByRole("link", { name: "Click me" });
     fireEvent.click(link);
     expect(mockOpenUrl).not.toHaveBeenCalled();
   });
 
-  it("forwards children and extra props", () => {
+  it("calls sdk.actions.openUrl on Android MiniApp", async () => {
+    mockUseMiniAppContext.mockReturnValue({ isInMiniApp: true });
+    vi.stubGlobal("navigator", {
+      ...navigator,
+      userAgent: "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36",
+    });
+    const { MiniAppLink } = await import("../miniapp-link.jsx");
+    render(<MiniAppLink href="https://example.com">Click me</MiniAppLink>);
+    const link = screen.getByRole("link", { name: "Click me" });
+    fireEvent.click(link);
+    expect(mockOpenUrl).toHaveBeenCalledWith("https://example.com");
+    vi.unstubAllGlobals();
+  });
+
+  it("does NOT call sdk.actions.openUrl outside MiniApp", async () => {
+    const { MiniAppLink } = await import("../miniapp-link.jsx");
+    render(<MiniAppLink href="https://example.com">Click me</MiniAppLink>);
+    const link = screen.getByRole("link", { name: "Click me" });
+    fireEvent.click(link);
+    expect(mockOpenUrl).not.toHaveBeenCalled();
+  });
+
+  it("forwards children and extra props", async () => {
+    const { MiniAppLink } = await import("../miniapp-link.jsx");
     render(
       <MiniAppLink href="https://example.com" className="custom" data-testid="my-link">
         <span>child</span>
