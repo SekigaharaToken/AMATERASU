@@ -19,6 +19,9 @@ export { MiniAppAutoConnect } from "./src/components/auth/MiniAppAutoConnect.jsx
 export { SwapPanel } from "./src/components/swap/SwapPanel.jsx";
 export { PriceDisplay } from "./src/components/swap/PriceDisplay.jsx";
 
+// Components — UI
+export { MiniAppLink } from "./src/components/ui/miniapp-link.jsx";
+
 // UI (shadcn re-exports)
 export { Button, buttonVariants } from "./src/components/ui/button.jsx";
 export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent } from "./src/components/ui/card.jsx";
