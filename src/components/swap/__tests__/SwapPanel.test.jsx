@@ -11,6 +11,7 @@ const mockGetSellEstimation = vi.fn();
 vi.mock("mint.club-v2-sdk", () => ({
   mintclub: {
     withPublicClient: vi.fn(),
+    withWalletClient: vi.fn(),
     network: () => ({
       token: () => ({
         buy: mockBuy,
@@ -33,8 +34,11 @@ vi.mock("../../../hooks/useWalletAddress.js", () => ({
   useWalletAddress: (...args) => mockUseWalletAddress(...args),
 }));
 
+const mockWalletClient = { account: { address: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266" }, chain: { id: 8453 } };
+
 vi.mock("wagmi", () => ({
   useReadContract: () => ({ data: undefined }),
+  useWalletClient: () => ({ data: mockWalletClient }),
 }));
 
 const { SwapPanel } = await import("../SwapPanel.jsx");

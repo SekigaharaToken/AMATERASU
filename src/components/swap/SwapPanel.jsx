@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import NumberFlow from "@number-flow/react";
 import { useQuery } from "@tanstack/react-query";
 import { formatUnits, parseUnits, erc20Abi } from "viem";
-import { useReadContract } from "wagmi";
+import { useReadContract, useWalletClient } from "wagmi";
 import { TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
 import { useWalletAddress } from "../../hooks/useWalletAddress.js";
@@ -143,6 +143,7 @@ function EstimationRows({ estimation, mode, tokenConfig, animate, t }) {
 export function SwapPanel({ tokenConfig }) {
   const { t } = useTranslation();
   const { address, canTransact } = useWalletAddress();
+  const { data: walletClient } = useWalletClient();
   const [mode, setMode] = useState("buy");
   const [amount, setAmount] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -239,14 +240,21 @@ export function SwapPanel({ tokenConfig }) {
   if (!parsedAmount) hasStaggered.current = false;
 
   async function handleSubmit() {
-    if (!amount || !address) return;
+    if (!amount || !address || !walletClient) return;
     setIsPending(true);
     try {
+      // Sync wagmi's walletClient into the SDK so it can sign transactions
+      mintclub.withWalletClient(walletClient);
       const amountWei = wei(amount);
+      let receipt;
       if (mode === "buy") {
-        await token.buy({ amount: amountWei, slippage: 2 });
+        receipt = await token.buy({ amount: amountWei, slippage: 2 });
       } else {
-        await token.sell({ amount: amountWei, slippage: 2 });
+        receipt = await token.sell({ amount: amountWei, slippage: 2 });
+      }
+      if (!receipt) {
+        toast.error(t("toast.swapFailed"));
+        return;
       }
       toast.success(t(mode === "buy" ? "toast.swapBuySuccess" : "toast.swapSellSuccess"));
       setAmount("");
@@ -313,6 +321,7 @@ export function SwapPanel({ tokenConfig }) {
           onClick={handleSubmit}
           disabled={
             !amount
+            || !walletClient
             || isPending
             || (mode === "sell" && supplyIsZero)
             || (mode === "buy" && supplyIsMax)

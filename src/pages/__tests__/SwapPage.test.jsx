@@ -8,6 +8,7 @@ vi.mock("../../hooks/useWalletAddress.js", () => ({
 
 vi.mock("wagmi", () => ({
   useReadContract: () => ({ data: undefined }),
+  useWalletClient: () => ({ data: { account: { address: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266" }, chain: { id: 8453 } } }),
 }));
 
 vi.mock("../../lib/mintclub.js", () => ({
